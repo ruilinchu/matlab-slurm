@@ -1,4 +1,4 @@
-function independentSubmitFcn(cluster, job, props)
+function independentSubmitFcn(cluster, job, props, sbatch_arg)
 %INDEPENDENTSUBMITFCN Submit a MATLAB job to a SLURM cluster
 %
 % Set your cluster's IndependentSubmitFcn to this function using the following
@@ -91,7 +91,7 @@ for ii = 1:numberOfTasks
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % You may also with to supply additional submission arguments to
     % the sbatch command here.
-    additionalSubmitArgs = '';
+    additionalSubmitArgs = sbatch_arg;
     dctSchedulerMessage(5, '%s: Generating command for task %i', currFilename, ii);
     commandToRun = getSubmitString(jobName, quotedLogFile, quotedScriptName, ...
         additionalSubmitArgs);

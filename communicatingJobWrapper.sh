@@ -117,19 +117,9 @@ cleanupAndExit() {
 launchSmpds() {
     # Launch the SMPD processes on all hosts using SSH
     echo "Starting SMPD on ${SMPD_HOSTS} ..."
-    for host in ${SMPD_HOSTS}
-      do
-      echo /usr/bin/srun \"${FULL_SMPD}\" -s -phrase MATLAB -port ${SMPD_PORT}
-      /usr/bin/srun \"${FULL_SMPD}\" -s -phrase MATLAB -port ${SMPD_PORT}
-      ssh_return=${?}
-      if [ ${ssh_return} -ne 0 ]
-          then
-          echo "Launching smpd failed for node: ${host}"
-          exit 1
-      else
-          SMPD_LAUNCHED_HOSTS="${SMPD_LAUNCHED_HOSTS} ${host}"
-      fi
-    done
+    echo "srun --ntasks-per-node=1 --ntasks=${SLURM_JOB_NUM_NODES} ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} -debug 0 &"
+    srun --ntasks-per-node=1 --ntasks=${SLURM_JOB_NUM_NODES} ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} -debug 0 &
+    sleep 20
     echo "All SMPDs launched"
 }
 

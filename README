@@ -6,4 +6,4 @@ to be used with SLURM via the generic cluster interface.
 put these scripts in ~/matlab/ 
 
 usage:
->> cluster=get_SLURM_Cluster('-t 24:00:00') 
+>> cluster=get_SLURM_cluster('-t 24:00:00') 

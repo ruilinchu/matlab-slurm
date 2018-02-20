@@ -1,4 +1,4 @@
-function communicatingSubmitFcn(cluster, job, props)
+function communicatingSubmitFcn(cluster, job, props, sbatch_arg)
 %COMMUNICATINGSUBMITFCN Submit a communicating MATLAB job to a SLURM cluster
 %
 % Set your cluster's CommunicatingSubmitFcn to this function using the following
@@ -84,7 +84,7 @@ jobName = sprintf('Job%d', job.ID);
 % can be used for a single job.
 % You may also with to supply additional submission arguments to
 % the sbatch command here.
-additionalSubmitArgs = sprintf('-n %d', props.NumberOfTasks);
+additionalSubmitArgs = sprintf('-n %d %s', props.NumberOfTasks, sbatch_arg);
 dctSchedulerMessage(4, '%s: Requesting %d nodes.', currFilename, props.NumberOfTasks);
 dctSchedulerMessage(5, '%s: Generating command for task %i', currFilename, ii);
 commandToRun = getSubmitString(jobName, quotedLogFile, quotedScriptName, ...

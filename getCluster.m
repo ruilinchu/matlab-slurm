@@ -1,4 +1,4 @@
-function cluster = getCluster(sbatch_arg)
+function cluster = get_SLURM_Cluster(sbatch_arg)
   % input is slurm sbatch arguments minus ntasks, e.g.:
   % '--time 24:00:00 --partition scec --mem-per-cpu 2G', list goes on
 

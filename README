@@ -3,7 +3,27 @@ Copyright 2010-2013 The MathWorks, Inc.
 This folder contains a number of files to allow Parallel Computing Toolbox
 to be used with SLURM via the generic cluster interface.
 
-put these scripts in ~/matlab/ 
+download and put these scripts in ~/matlab/ 
 
-usage:
->> cluster=get_SLURM_cluster('-t 24:00:00') 
+It's highly recommanded that you put
+
+export TZ=America/Los_Angeles 
+
+in your ~/.bashrc file.
+
+* To start a matlab pool on a single(compute) node, use
+
+cluster=get_LOCAL_cluster
+
+for a more detailed example, see example_local.m file.
+
+
+* To start a matlab pool spanning multiple(compute) nodes through SLURM, use
+
+
+cluster=get_SLURM_cluster('-t 24:00:00') 
+
+
+where "-t 24:00:00" is input for slurm sbatch options, you can put more options here, e.g. account request, memory request etc.
+But don't put "-n" (number of tasks) here, "-n" option is requested throught the parpool command. For a more detailed example,
+see example_slurm.m file.

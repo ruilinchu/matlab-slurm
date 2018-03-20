@@ -25,5 +25,5 @@ cluster=get_SLURM_cluster('-t 24:00:00')
 
 
 where "-t 24:00:00" is input for slurm sbatch options, you can put more options here, e.g. account request, memory request etc.
-But don't put "-n" (number of tasks) here, "-n" option is requested throught the parpool command. For a more detailed example,
-see example_slurm.m file.
+But don't put "-n" (number of tasks) here, "-n" option is requested throught the parpool command. 
+For a more detailed example, see example_slurm.m file.

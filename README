@@ -23,11 +23,8 @@ before you can use parpool to start the pool and use parfor or spmd. For a more 
 
 cluster=get_SLURM_cluster('-t 24:00:00') 
 
-before you can use parpool to start the pool and use parfor or spmd. Here "-t 24:00:00" is an example input for slurm \
-sbatch options, you can put more options here, e.g. account request, memory request etc.
+before you can use parpool to start the pool and use parfor or spmd. Here "-t 24:00:00" is an example input for slurm sbatch options, you can put more options here, e.g. account request, memory request etc.
 
-But don't put "-n" (number of tasks) here, "-n" option is requested throught the parpool command. \
-For a more detailed example, see example_slurm.m file.
+But don't put "-n" (number of tasks) here, "-n" option is requested throught the parpool command. For a more detailed example, see example_slurm.m file.
 
-The job's output and logs from Matlab will be stored in ~/MATLAB_JOB_STORAGE_local and ~/MATLAB_JOB_STORAGE,\
-if you wish to change the locations, edit it in get_LOCAL_cluster.m and get_SLURM_cluster.m.
+The job's output and logs from Matlab will be stored in ~/MATLAB_JOB_STORAGE_local and ~/MATLAB_JOB_STORAGE, if you wish to change the locations, edit it in get_LOCAL_cluster.m and get_SLURM_cluster.m.

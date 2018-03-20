@@ -1,4 +1,4 @@
-c = get_SLURM_cluster('-t 24:00:00 -p main');
+c = get_SLURM_cluster('-t 24:00:00 -A lc_hpcc');
 
 c.parpool(8) %request ntasks=8
 

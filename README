@@ -9,7 +9,8 @@ It's highly recommanded that you put
 
 export TZ=America/Los_Angeles 
 
-in your ~/.bashrc file.
+in your ~/.bashrc file, or you will see complains from Matlab.
+
 
 * To start a matlab pool on a single(compute) node, use
 
@@ -19,7 +20,6 @@ before you can use parpool to start the pool and use parfor or spmd. For a more 
 
 
 * To start a matlab pool spanning multiple(compute) nodes through SLURM, use
-
 
 cluster=get_SLURM_cluster('-t 24:00:00') 
 

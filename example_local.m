@@ -26,4 +26,5 @@ end
 
 A{:}
 
-delete(gcp)
+delete(gcp('nocreate'))
+

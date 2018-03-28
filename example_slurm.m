@@ -1,4 +1,5 @@
 c = get_SLURM_cluster('-t 10:00:00 --mem-per-cpu=3G');
+% mem-per-cpu is important since the default is only 1G, matlab workers will die out
 
 c.parpool(8) %request ntasks=8
 

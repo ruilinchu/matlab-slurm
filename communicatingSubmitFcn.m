@@ -84,7 +84,7 @@ jobName = sprintf('Job%d', job.ID);
 % can be used for a single job.
 % You may also with to supply additional submission arguments to
 % the sbatch command here.
-additionalSubmitArgs = sprintf('-n %d %s', props.NumberOfTasks, sbatch_arg);
+additionalSubmitArgs = sprintf('-n %d %s%d %s', props.NumberOfTasks, 'matlab@hpc-licenses:', props.NumberOfTasks, sbatch_arg);
 dctSchedulerMessage(4, '%s: Requesting %d nodes.', currFilename, props.NumberOfTasks);
 dctSchedulerMessage(5, '%s: Generating command for task %i', currFilename, ii);
 commandToRun = getSubmitString(jobName, quotedLogFile, quotedScriptName, ...

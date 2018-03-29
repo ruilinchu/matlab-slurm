@@ -120,7 +120,7 @@ cleanupAndExit() {
     echo "Stopping SMPD with srun over port $SMPD_PORT" 
     srun --ntasks-per-node=1 --ntasks=${SLURM_JOB_NUM_NODES} ${FULL_SMPD} -shutdown -phrase MATLAB -port ${SMPD_PORT}
     echo "SMPD stopped with srun"
-    pkill srun
+    pkill -9 srun &> /dev/null
  #   echo "Exiting with code: ${MPIEXEC_CODE}"
  #   exit ${MPIEXEC_CODE}
 }

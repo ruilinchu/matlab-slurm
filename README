@@ -29,3 +29,106 @@ But don't put "-n" (number of tasks) here, "-n" option is requested throught the
 
 The job's output and logs from Matlab will be stored in ~/MATLAB_JOB_STORAGE_local and ~/MATLAB_JOB_STORAGE, if you wish to change the locations, edit it in get_LOCAL_cluster.m and get_SLURM_cluster.m.
 Matlab's terminal output can be captured by the diary cmd, for details, read Matlab's documentation.
+
+>> c=get_SLURM_cluster('-t 4:00:00 --mem-per-cpu=2G -p isi')
+
+c = 
+
+ Generic Cluster
+
+    Properties: 
+
+                          Profile: 
+                         Modified: true
+                             Host: hpc1458.hpcc.usc.edu
+                       NumWorkers: Inf
+                       NumThreads: 1
+
+               JobStorageLocation: /staging/hpcc/jimichu/MATLAB_JOB_STORAGE
+                ClusterMatlabRoot: /usr/usc/matlab/default/
+                  OperatingSystem: unix
+
+             IndependentSubmitFcn: [1x2 cell]
+           CommunicatingSubmitFcn: [1x2 cell]
+                   GetJobStateFcn: @getJobStateFcn
+                     CancelJobFcn: []
+                    CancelTaskFcn: []
+                     DeleteJobFcn: @deleteJobFcn
+                    DeleteTaskFcn: []
+ RequiresMathWorksHostedLicensing: false
+
+    Associated Jobs: 
+
+                   Number Pending: 0
+                    Number Queued: 1
+                   Number Running: 4
+                  Number Finished: 0
+
+>> j=c.batch('demo_spmd','Pool',90,'CaptureDiary',true)    
+
+j = 
+
+ Job
+
+    Properties: 
+
+                   ID: 6
+                 Type: pool
+             Username: jimichu
+                State: queued
+       SubmitDateTime: 30-Mar-2018 11:07:37
+        StartDateTime: 
+     Running Duration: 0 days 0h 0m 0s
+      NumWorkersRange: [91 91]
+           NumThreads: 1
+
+      AutoAttachFiles: true
+  Auto Attached Files: /home/rcf-00/jimichu/matlab/demo_spmd.m
+        AttachedFiles: {}
+      AdditionalPaths: {}
+
+    Associated Tasks: 
+
+       Number Pending: 91
+       Number Running: 0
+      Number Finished: 0
+    Task ID of Errors: []
+  Task ID of Warnings: []
+
+>> j.State
+
+ans =
+
+finished
+>> j.diary
+--- Start Diary ---
+
+ans =
+
+     1     2     3     4     5
+
+
+ans =
+
+     1     2     3     4     5
+
+
+ans =
+
+    11    12    13    14    15
+...
+Lab  1: 
+  this is display from worker: 1
+Lab  3: 
+  this is display from worker: 3
+Lab  4: 
+  this is display from worker: 4
+...
+Lab 76: 
+  this is display from worker: 76
+Lab 80: 
+  this is display from worker: 80
+Lab 81: 
+  this is display from worker: 81
+Lab 90: 
+  this is display from worker: 90

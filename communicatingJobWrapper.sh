@@ -36,7 +36,6 @@ print $1
 cleanupAndExit() {
     echo "Stopping SMPD over port $SMPD_PORT" 
     pdsh -w $SLURM_NODELIST ${FULL_SMPD} -shutdown -phrase MATLAB -port ${SMPD_PORT}
-    pdsh -w $SLURM_NODELIST killall -u $USER
     rm -fr /tmp/kon1uaLw3sOZnkvg /tmp/kon1uaLw3sOZnkvg2
     echo "SMPD stopped"
     exit $SMPD_FAIL

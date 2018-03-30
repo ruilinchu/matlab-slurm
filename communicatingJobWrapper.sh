@@ -35,16 +35,27 @@ print $1
 
 cleanupAndExit() {
     echo "Stopping SMPD over port $SMPD_PORT" 
-    pdsh -t 120 -w $SLURM_NODELIST ${FULL_SMPD} -shutdown -phrase MATLAB -port ${SMPD_PORT}
+    pdsh -w $SLURM_NODELIST ${FULL_SMPD} -shutdown -phrase MATLAB -port ${SMPD_PORT}
+    pdsh -w $SLURM_NODELIST killall -u $USER
+    rm -fr /tmp/kon1uaLw3sOZnkvg /tmp/kon1uaLw3sOZnkvg2
     echo "SMPD stopped"
+    exit $SMPD_FAIL
 }
 
 launchSmpds() {
     echo "Starting SMPD over port $SMPD_PORT..."
-    echo "pdsh -t 120 -w $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} "
-    pdsh -t 120 -w $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} 
-    sleep 10
-    echo "All SMPDs launched"
+    echo "launching $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} "
+    pdsh -t 30 -f 1 -w $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT}  &>/dev/null &
+    sleep 60
+    pdsh -S -w $SLURM_NODELIST "ps aux | grep ^$USER | grep '[b]in/glnxa64/smpd -phrase MATLAB -port'" &> /dev/null
+    if [ $? == 1 ]; then
+        echo SMPD launch failed
+        SMPD_FAIL=1
+        exit 1
+    else
+        echo "All SMPDs launched"
+        SMPD_FAIL=0
+    fi
 }
 
 runMpiexec() {

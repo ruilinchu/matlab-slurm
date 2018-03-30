@@ -132,3 +132,27 @@ Lab 81:
   this is display from worker: 81
 Lab 90: 
   this is display from worker: 90
+
+>> jj=c.findJob
+
+jj = 
+
+ 9x1 Job array:
+ 
+         ID           Type        State              FinishDateTime  Username  Tasks
+       -----------------------------------------------------------------------------
+    1     1           pool     finished                               jimichu     81
+    2     2           pool     finished                               jimichu    129
+    3     3           pool     finished                               jimichu     91
+    4     4           pool     finished                               jimichu     91
+    5     5           pool     finished        30-Mar-2018 11:08:12   jimichu     91
+    6     6           pool       queued                               jimichu     91
+    7     7           pool     finished                               jimichu    161
+    8     8           pool       queued                               jimichu    129
+    9     9           pool       queued                               jimichu    129
+
+>> jj(9).State
+
+ans =
+
+running

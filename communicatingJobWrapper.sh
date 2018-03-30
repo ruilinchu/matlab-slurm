@@ -35,14 +35,14 @@ print $1
 
 cleanupAndExit() {
     echo "Stopping SMPD over port $SMPD_PORT" 
-    pdsh -w $SLURM_NODELIST ${FULL_SMPD} -shutdown -phrase MATLAB -port ${SMPD_PORT}
+    pdsh -t 120 -w $SLURM_NODELIST ${FULL_SMPD} -shutdown -phrase MATLAB -port ${SMPD_PORT}
     echo "SMPD stopped"
 }
 
 launchSmpds() {
     echo "Starting SMPD over port $SMPD_PORT..."
-    echo "pdsh -w $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} "
-    pdsh -w $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} 
+    echo "pdsh -t 120 -w $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} "
+    pdsh -t 120 -w $SLURM_NODELIST ${FULL_SMPD} -phrase MATLAB -port ${SMPD_PORT} 
     sleep 10
     echo "All SMPDs launched"
 }
